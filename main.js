@@ -1,4 +1,4 @@
-const TEXT = 'd03.eu'
+const TEXT = 'RGB<br>rainbow'
 
 const minColor = 0;
 const maxColor = 255;

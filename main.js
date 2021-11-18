@@ -2,16 +2,41 @@ const TEXT = 'RGB<br>rainbow'
 
 const minColor = 0;
 const maxColor = 255;
+//TODO: podstaw consty za wartości '0' i '255'
+const blackColor = 'rgb(20, 20, 20)';
 
-const colorText = jQuery('#colors');
+const text = jQuery('#colors');
 const mainBackgnd = jQuery('main');
 
-let modified = colorText;
+let modified = text;
 
 const delay = (msec) => {
     return new Promise(resolve => setTimeout(resolve, msec));
 };
 
+const rainbowText = (step) => {
+    mainBackgnd.css('background-color', blackColor);
+    text.empty();
+    text.css('color', rainbow(step * 5));
+    text.append(TEXT);
+};
+
+const rainbowBackgnd = (step) => {
+    text.empty();
+    text.css('color', blackColor);
+    text.append(TEXT);
+    mainBackgnd.css('background-color', rainbow(step * 5));
+};
+
+let isOnText = true;
+
+const handleRainbowChange = () => {
+    isOnText = !isOnText;
+};
+
+mainBackgnd.click(handleRainbowChange);
+
+//TODO: zmień przebiegi na przecinające się w połowie amplitudy
 const rainbow = (step) => {
     let r, g, b;
     if (step <= 255) {
@@ -44,9 +69,11 @@ const rainbow = (step) => {
 
 const loop = async () => {
     for (let i = 0; i <= 6 * (255 / 5); i++) {
-        colorText.empty();
-        colorText.css('color', rainbow(i * 5));
-        colorText.append(TEXT);
+        if (isOnText) {
+            rainbowText(i)
+        } else {
+            rainbowBackgnd(i)
+        }
         await delay(10);
     }
     loop();

@@ -36,7 +36,6 @@ const handleRainbowChange = () => {
 
 mainBackgnd.click(handleRainbowChange);
 
-//TODO: zmień przebiegi na przecinające się w połowie amplitudy
 const rainbow = (step) => {
     let r, g, b;
     if (step <= 255) {
